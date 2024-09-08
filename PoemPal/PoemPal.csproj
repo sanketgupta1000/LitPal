@@ -77,6 +77,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
     <Content Include="Signup.aspx" />
+    <Content Include="UpdateContent.aspx" />
     <Content Include="VerifyOtp.aspx" />
     <Content Include="View.aspx" />
     <Content Include="Web.config" />
@@ -118,6 +119,13 @@
     </Compile>
     <Compile Include="Signup.aspx.designer.cs">
       <DependentUpon>Signup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateContent.aspx.cs">
+      <DependentUpon>UpdateContent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateContent.aspx.designer.cs">
+      <DependentUpon>UpdateContent.aspx</DependentUpon>
     </Compile>
     <Compile Include="VerifyOtp.aspx.cs">
       <DependentUpon>VerifyOtp.aspx</DependentUpon>

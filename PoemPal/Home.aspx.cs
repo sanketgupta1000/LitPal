@@ -36,7 +36,7 @@ namespace PoemPal
 
             // create a view
             DataView dv = new DataView(ds.Tables["Content"]);
-
+            int currentUser = (int)Session["id"];
             if(selectedType=="stories")
             {
                 dv.RowFilter = "Type = 'Story'";
@@ -44,6 +44,10 @@ namespace PoemPal
             else if(selectedType=="poems")
             {
                 dv.RowFilter = "Type = 'Poem'";
+            }
+            else if(selectedType == "your")
+            {
+                dv.RowFilter = $"Aid = {currentUser}";
             }
 
             // table of only the required columns

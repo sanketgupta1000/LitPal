@@ -55,7 +55,10 @@
 
         <div>
 
-            <asp:Button runat="server" ID="btnSubmit" Text="Submit" />
+            <asp:Button runat="server" ID="btnSubmit" Text="Submit" OnClick="btnSubmit_Click" />
+
+        &nbsp;&nbsp;&nbsp;
+            <asp:Button ID="btnHome" runat="server" CausesValidation="False" OnClick="btnHome_Click" Text="Go Home" Width="103px" />
 
         </div>
     </form>

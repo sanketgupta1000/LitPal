@@ -39,6 +39,9 @@
 
                 <asp:Button runat="server" ID="btnLogin" Text="Login"/>
 
+            &nbsp;&nbsp;&nbsp;
+                <asp:HyperLink ID="hpSignup" runat="server" NavigateUrl="~/Signup.aspx">Sign Up</asp:HyperLink>
+
             </div>
 
         </div>

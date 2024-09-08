@@ -76,7 +76,7 @@ namespace PoemPal
                     // connection object
                     SqlConnection con = new SqlConnection(ConnectionStr);
                     SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandText = "SELECT C.Id, C.Title, C.Type, U.Name as Author, C.Date, C.Content " +
+                    cmd.CommandText = "SELECT C.Id, C.Title, C.Type, U.Name as Author, C.Date, C.Content, C.Author as Aid " +
                          "FROM Content C " +
                          "INNER JOIN Users U ON U.Id = C.Author";
 
@@ -141,6 +141,55 @@ namespace PoemPal
             return id;
 
         }
+        public static void deleteContent(string postId)
+        {
+            // Log for debugging
+            Debug.WriteLine("Deleting content from DB");
 
+            
+            using (SqlConnection con = new SqlConnection(ConnectionStr))
+            {
+                
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "DELETE FROM Content WHERE Id = @postId";
+                cmd.Parameters.AddWithValue("@postId", postId);
+
+                
+                con.Open();
+
+                
+                cmd.ExecuteNonQuery();
+
+                
+                con.Close();
+            }
+
+            // Invalidate the cache to ensure that the deleted content is no longer in the cache
+            Cache.Remove(CacheKey);
+
+            // reload the data from the database and update the cache
+            GetFromDatabase();
+        }
+        public static void updateContent(int postId, string title, string content)
+        {
+            Debug.WriteLine("Updating content in DB");
+            using (SqlConnection con = new SqlConnection(ConnectionStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "UPDATE Content SET Title=@Title, Content=@Content WHERE Id=@postId";
+
+                cmd.Parameters.AddWithValue("@Title", title);
+                cmd.Parameters.AddWithValue("@Content", content);
+                cmd.Parameters.AddWithValue("@postId", postId);
+
+                con.Open();
+                int n = cmd.ExecuteNonQuery();
+                con.Close();
+                Debug.WriteLine(n);
+                Debug.WriteLine("Updated content in DB");
+            }
+            Cache.Remove(CacheKey);
+            GetFromDatabase();
+        }
     }
 }
