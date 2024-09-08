@@ -29,6 +29,8 @@
                     <asp:ListItem Value="poems">Poems</asp:ListItem>
                     <asp:ListItem Value="both">Stories & Poems</asp:ListItem>
 
+                    <asp:ListItem Value="your">By You</asp:ListItem>
+
                 </asp:DropDownList>
 
             </div>

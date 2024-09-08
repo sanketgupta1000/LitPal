@@ -18,10 +18,10 @@ namespace PoemPal
                 Response.Redirect("/Login.aspx");
             }
 
-            if(IsPostBack)
+            /*if(IsPostBack)
             {
                 HandleSubmission();
-            }
+            }*/
 
         }
 
@@ -32,6 +32,38 @@ namespace PoemPal
             string type;
 
             if(ddlType.SelectedValue=="1")
+            {
+                type = "Story";
+            }
+            else
+            {
+                type = "Poem";
+            }
+
+            DateTime date = DateTime.Now;
+
+            int authorId = Convert.ToInt32(Session["id"]);
+
+            // insert, update cache, get id
+            int contentId = DataManager.InsertContentAndUpdateCache(type, title, content, date, authorId);
+
+            // redirect to view page
+            Response.Redirect($"/View.aspx?id={contentId}");
+            //Response.Redirect("/Home.aspx");
+        }
+
+        protected void btnHome_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Home.aspx");
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            string title = tbTitle.Text;
+            string content = tbContent.Text;
+            string type;
+
+            if (ddlType.SelectedValue == "1")
             {
                 type = "Story";
             }
